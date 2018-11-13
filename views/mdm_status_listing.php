@@ -12,7 +12,7 @@ new Mdm_status_model;
 
   	<div class="col-lg-12">
 
-		  <h3><span data-i18n="mdm_status.report"></span> <span id="total-count" class='label label-primary'>…</span></h3>
+		  <h3><span data-i18n="mdm_status.listing.title"></span> <span id="total-count" class='label label-primary'>…</span></h3>
 
 		  <table class="table table-striped table-condensed table-bordered">
 		    <thead>
@@ -88,7 +88,24 @@ new Mdm_status_model;
 	        	var link = mr.getClientDetailLink(name, sn);
 	        	$('td:eq(0)', nRow).html(link);
 
-        }
+            var dep_enrolled = $('td:eq(3)', nRow).html();
+            $('td:eq(3)', nRow).html(function(){
+                if( dep_enrolled == 'Yes'){
+                    return '<span class="label label-success">'+i18n.t('Enrolled')+'</span>';
+                }
+                return '<span class="label label-danger">'+i18n.t('Not Enrolled')+'</span>';
+            });
+
+            var mdm_enrolled = $('td:eq(4)', nRow).html();
+            $('td:eq(4)', nRow).html(function(){
+                if( mdm_enrolled == 'Yes'){
+                    return '<span class="label label-warning">'+i18n.t('Enrolled')+'</span>';
+								} else if( mdm_enrolled == 'Yes (User Approved)'){
+										return '<span class="label label-success">'+i18n.t('Enrolled - User Approved')+'</span>';
+								}
+                return '<span class="label label-danger">'+i18n.t('Not Enrolled')+'</span>';
+            });
+	        }
     });
   });
 </script>
