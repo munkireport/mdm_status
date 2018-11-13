@@ -1,13 +1,4 @@
 {
-    "listing": {
-        "title": "MDM Status"
-    },
-    "report": {
-        "title": "MDM Status Report"
-    },
-    "widget": {
-        "title": "MDM Status Widget"
-    },
 	"dep": "DEP",
 	"dep_enrolled": "DEP Enrolled",
 	"enrolled": "Enrolled",
