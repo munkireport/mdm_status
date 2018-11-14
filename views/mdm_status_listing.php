@@ -91,19 +91,19 @@ new Mdm_status_model;
             var dep_enrolled = $('td:eq(3)', nRow).html();
             $('td:eq(3)', nRow).html(function(){
                 if( dep_enrolled == 'Yes'){
-                    return '<span class="label label-success">'+i18n.t('Enrolled')+'</span>';
+                    return '<span class="label label-success">'+i18n.t('mdm_status.enrolled')+'</span>';
                 }
-                return '<span class="label label-danger">'+i18n.t('Not Enrolled')+'</span>';
+                return '<span class="label label-danger">'+i18n.t('mdm_status.not_enrolled')+'</span>';
             });
 
             var mdm_enrolled = $('td:eq(4)', nRow).html();
             $('td:eq(4)', nRow).html(function(){
                 if( mdm_enrolled == 'Yes'){
-                    return '<span class="label label-warning">'+i18n.t('Enrolled')+'</span>';
+                    return '<span class="label label-warning">'+i18n.t('mdm_status.not_uamdm')+'</span>';
 								} else if( mdm_enrolled == 'Yes (User Approved)'){
-										return '<span class="label label-success">'+i18n.t('Enrolled - User Approved')+'</span>';
+										return '<span class="label label-success">'+i18n.t('mdm_status.user_approved')+'</span>';
 								}
-                return '<span class="label label-danger">'+i18n.t('Not Enrolled')+'</span>';
+                return '<span class="label label-danger">'+i18n.t('mdm_status.not_enrolled')+'</span>';
             });
 	        }
     });
