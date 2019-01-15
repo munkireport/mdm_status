@@ -45,6 +45,7 @@ def get_mdm_status_legacy():
     run = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, err = run.communicate()
 
+    result = {}
     try:
         plist = plistlib.readPlistFromString(output)
     except: # pylint: disable=bare-except
@@ -58,11 +59,16 @@ def get_mdm_status_legacy():
                 except KeyError:
                     profile_type = ''
                 if profile_type == 'com.apple.mdm':
-                    return {'mdm_enrolled': "Yes"}
+                    result.update({'mdm_enrolled': "Yes"})
+                    return result
     except KeyError:
-        return {'mdm_enrolled': "No"}
+        result.update({'mdm_enrolled': "No"})
+        result.update({'mdm_enrolled_via_dep': "No"})
+        return result
 
-    return {'mdm_enrolled': "No"}
+    result.update({'mdm_enrolled': "No"})
+    result.update({'mdm_enrolled_via_dep': "No"})
+    return result
 
 
 def get_minor_os_version():
