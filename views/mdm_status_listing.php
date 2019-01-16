@@ -19,9 +19,9 @@ new Mdm_status_model;
 		      <tr>
 		        <th data-i18n="listing.computername" data-colname='machine.computer_name'></th>
 		        <th data-i18n="serial" data-colname='reportdata.serial_number'></th>
-		        <th data-i18n="username" data-colname='reportdata.long_username'></th>
+                <th data-i18n="username" data-colname='reportdata.long_username'></th>
+                <th data-i18n="mdm_status.mdm_enrollment" data-colname='mdm_status.mdm_enrolled'></th>
 		        <th data-i18n="mdm_status.mdm_enrolled_via_dep" data-colname='mdm_status.mdm_enrolled_via_dep'></th>
-		        <th data-i18n="mdm_status.mdm_enrollment" data-colname='mdm_status.mdm_enrolled'></th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -88,7 +88,7 @@ new Mdm_status_model;
 	        	var link = mr.getClientDetailLink(name, sn);
 	        	$('td:eq(0)', nRow).html(link);
 
-            var dep_enrolled = $('td:eq(3)', nRow).html();
+            var dep_enrolled = $('td:eq(4)', nRow).html();
             $('td:eq(3)', nRow).html(function(){
                 if( dep_enrolled == 'Yes'){
                     return '<span class="label label-success">'+i18n.t('mdm_status.enrolled')+'</span>';
@@ -96,7 +96,7 @@ new Mdm_status_model;
                 return '<span class="label label-danger">'+i18n.t('mdm_status.not_enrolled')+'</span>';
             });
 
-            var mdm_enrolled = $('td:eq(4)', nRow).html();
+            var mdm_enrolled = $('td:eq(3)', nRow).html();
             $('td:eq(4)', nRow).html(function(){
                 if( mdm_enrolled == 'Yes'){
                     return '<span class="label label-warning">'+i18n.t('mdm_status.not_uamdm')+'</span>';
