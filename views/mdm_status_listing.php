@@ -91,9 +91,9 @@ new Mdm_status_model;
             var dep_enrolled = $('td:eq(4)', nRow).html();
             $('td:eq(3)', nRow).html(function(){
                 if( dep_enrolled == 'Yes'){
-                    return '<span class="label label-success">'+i18n.t('mdm_status.enrolled')+'</span>';
+                    return '<span class="label label-success">'+i18n.t('mdm_status.mdm_enrolled_via_dep')+'</span>';
                 }
-                return '<span class="label label-danger">'+i18n.t('mdm_status.not_enrolled')+'</span>';
+                return '<span class="label label-danger">'+i18n.t('mdm_status.mdm_not_enrolled_via_dep')+'</span>';
             });
 
             var mdm_enrolled = $('td:eq(3)', nRow).html();
