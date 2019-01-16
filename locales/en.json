@@ -6,6 +6,7 @@
 	"not_uamdm": "Not User Approved",
 	"non_uamdm": "Non-UAMDM",
     "mdm_enrolled_via_dep": "Enrolled via DEP",
+    "mdm_not_enrolled_via_dep": "Not Enrolled via DEP",
     "mdm_enrollment": "MDM Enrollment",
  	"mdm_user_approved": "User Approved MDM Status",
  	"no": "No",
