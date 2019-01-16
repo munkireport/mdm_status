@@ -59,7 +59,7 @@ def get_mdm_status_legacy():
                 except KeyError:
                     profile_type = ''
                 if profile_type == 'com.apple.mdm':
-                    result.update({'mdm_enrolled': "Yes"})
+                    result.update({'mdm_enrolled': "Yes (User Approved)"})
                     return result
     except KeyError:
         result.update({'mdm_enrolled': "No"})
