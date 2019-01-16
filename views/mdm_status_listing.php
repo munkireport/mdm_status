@@ -89,7 +89,7 @@ new Mdm_status_model;
 	        	$('td:eq(0)', nRow).html(link);
 
             var dep_enrolled = $('td:eq(4)', nRow).html();
-            $('td:eq(3)', nRow).html(function(){
+            $('td:eq(4)', nRow).html(function(){
                 if( dep_enrolled == 'Yes'){
                     return '<span class="label label-success">'+i18n.t('mdm_status.mdm_enrolled_via_dep')+'</span>';
                 }
@@ -97,7 +97,7 @@ new Mdm_status_model;
             });
 
             var mdm_enrolled = $('td:eq(3)', nRow).html();
-            $('td:eq(4)', nRow).html(function(){
+            $('td:eq(3)', nRow).html(function(){
                 if( mdm_enrolled == 'Yes'){
                     return '<span class="label label-warning">'+i18n.t('mdm_status.not_uamdm')+'</span>';
 								} else if( mdm_enrolled == 'Yes (User Approved)'){
