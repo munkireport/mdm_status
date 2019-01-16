@@ -70,7 +70,7 @@ class Mdm_status_model extends \Model
     {
         $sql = "SELECT COUNT(CASE WHEN mdm_enrolled = 'NO' THEN 1 END) AS mdm_no,
 			COUNT(CASE WHEN mdm_enrolled = 'Yes' THEN 1 END) AS non_uamdm, 
-			COUNT(CASE WHEN mdm_enrolled = 'Yes (User Approved)' AND mdm_enrolled_via_dep = 'No' THEN 1 END) AS uamdm,
+			COUNT(CASE WHEN mdm_enrolled = 'Yes (User Approved)' AND mdm_enrolled_via_dep <> 'Yes' THEN 1 END) AS uamdm,
 			COUNT(CASE WHEN mdm_enrolled = 'Yes (User Approved)' AND mdm_enrolled_via_dep = 'Yes' THEN 1 END) AS dep_enrolled			
 			FROM mdm_status
 			LEFT JOIN reportdata USING (serial_number)
