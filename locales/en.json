@@ -2,6 +2,7 @@
 	"dep": "DEP",
 	"dep_enrolled": "DEP Enrolled",
 	"enrolled": "Enrolled",
+	"enrolled_in_mdm": "Enrolled in MDM",
 	"not_enrolled": "Not Enrolled",
 	"not_uamdm": "Not User Approved",
 	"non_uamdm": "Non-UAMDM",
