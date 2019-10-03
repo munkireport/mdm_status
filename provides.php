@@ -1,6 +1,9 @@
 <?php
 
 return array(
+    'detail_widgets' => [
+        'mdm_status_detail' => ['view' => 'mdm_status_detail_widget'],
+    ],
     'listings' => array(
         'mdm_status' => array('view' => 'mdm_status_listing', 'i18n' => 'mdm_status.title'),
     ),
