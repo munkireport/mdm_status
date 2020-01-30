@@ -45,7 +45,14 @@ def get_mdm_status_legacy():
     run = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output, err = run.communicate()
 
-    result = {}
+    dep_cmd = ['/usr/bin/profiles', '-e']
+    dep_proc = subprocess.Popen(dep_cmd, shell=False, bufsize=-1,
+                            stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    (dep_output, unused_error) = dep_proc.communicate()
+
+    mdm_enrolled_via_dep = ''
+    mdm_enrollment = ''
     try:
         plist = plistlib.readPlistFromString(output)
     except: # pylint: disable=bare-except
@@ -59,15 +66,22 @@ def get_mdm_status_legacy():
                 except KeyError:
                     profile_type = ''
                 if profile_type == 'com.apple.mdm':
-                    result.update({'mdm_enrolled': "Yes (User Approved)"})
-                    return result
+                    mdm_enrolled = "Yes (User Approved)"
     except KeyError:
-        result.update({'mdm_enrolled': "No"})
-        result.update({'mdm_enrolled_via_dep': "No"})
-        return result
+        mdm_enrolled =  "No"
+        mdm_enrolled_via_dep = "No"
 
-    result.update({'mdm_enrolled': "No"})
-    result.update({'mdm_enrolled_via_dep': "No"})
+    try:
+        if "ConfigurationURL" in dep_output:
+            mdm_enrolled_via_dep = "Yes"
+        else: 
+            mdm_enrolled_via_dep = "Yes"
+    except:
+            mdm_enrolled_via_dep = "No"
+            
+    result = {}
+    result.update({'mdm_enrolled': mdm_enrolled})
+    result.update({'mdm_enrolled_via_dep': mdm_enrolled_via_dep})
     return result
 
 
