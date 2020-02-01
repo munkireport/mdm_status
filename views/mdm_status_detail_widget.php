@@ -16,7 +16,7 @@ $(document).on('appReady', function(){
                         .text(item.mdm_enrolled)))
                 .append($('<tr>')
                     .append($('<th>')
-                        .text(i18n.t('mdm_status.mdm_enrolled_via_dep')))
+                        .text(i18n.t('mdm_status.mdm_enrolled_via_dep_status')))
                     .append($('<td>')
                         .text(item.mdm_enrolled_via_dep)));
 		});
