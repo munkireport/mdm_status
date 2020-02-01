@@ -2,7 +2,7 @@
     <div class="panel panel-default" id="mdm-mdm_enrolled_via_dep_widget">
         <div class="panel-heading" data-container="body" title="">
             <h3 class="panel-title"><i class="fa fa-cogs"></i>
-                <span data-i18n="mdm_status.mdm_enrolled_via_dep"></span>
+                <span data-i18n="mdm_status.mdm_enrolled_via_dep_status"></span>
                 <list-link data-url="/show/listing/mdm_status/mdm_status"></list-link>
             </h3>
         </div>
@@ -26,10 +26,10 @@ $(document).on('appUpdate', function(e, lang) {
 
 		// Set statuses
         if(data.not_dep_enrolled){
-			panel.append(' <a href="'+baseUrl+'No" class="btn btn-danger"><span class="bigger-150">'+data.not_dep_enrolled+'</span><br>'+"  "+i18n.t('mdm_status.not_enrolled')+"  "+'</a>');
+			panel.append(' <a href="'+baseUrl+'No" class="btn btn-danger"><span class="bigger-150">'+data.not_dep_enrolled+'</span><br>'+"  "+i18n.t('mdm_status.dep_not_assigned')+"  "+'</a>');
 		}
 		if(data.dep_enrolled){
-			panel.append(' <a href="'+baseUrl+'Yes" class="btn btn-success"><span class="bigger-150">'+data.dep_enrolled+'</span><br>'+"  "+i18n.t('mdm_status.dep_enrolled')+"  "+'</a>');
+			panel.append(' <a href="'+baseUrl+'Yes" class="btn btn-success"><span class="bigger-150">'+data.dep_enrolled+'</span><br>'+"  "+i18n.t('mdm_status.assigned')+"  "+'</a>');
 		}
     });
 });
