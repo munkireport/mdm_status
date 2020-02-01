@@ -2,7 +2,7 @@
     <div class="panel panel-default" id="mdm-mdm_enrolled_via_dep_widget">
         <div class="panel-heading" data-container="body" title="">
             <h3 class="panel-title"><i class="fa fa-cogs"></i>
-                <span data-i18n="mdm_status.mdm_enrolled_via_dep_status"></span>
+                <span data-i18n="mdm_status.mdm_enrolled_via_dep"></span>
                 <list-link data-url="/show/listing/mdm_status/mdm_status"></list-link>
             </h3>
         </div>
