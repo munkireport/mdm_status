@@ -12,7 +12,7 @@
     "mdm_enrolled_via_dep_status": "ABM/ASM Assignment Status",
     "mdm_not_enrolled_via_dep": "Not Assigned in ABM/ASM",
     "mdm_enrollment": "MDM Enrollment",
- 	"mdm_user_approved": "User Approved MDM Status",
+ 	"mdm_user_approved": "Installed MDM Status",
  	"no": "No",
     "mdm_report": "MDM Report",
     "uamdm": "UAMDM",
