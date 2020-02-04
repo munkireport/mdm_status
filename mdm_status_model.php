@@ -68,7 +68,7 @@ class Mdm_status_model extends \Model
 
     public function get_mdm_stats()
     {
-        $sql = "SELECT COUNT(CASE WHEN mdm_enrolled = 'NO' THEN 1 END) AS mdm_no,
+        $sql = "SELECT COUNT(CASE WHEN mdm_enrolled = 'No' THEN 1 END) AS mdm_no,
 			COUNT(CASE WHEN mdm_enrolled = 'Yes' THEN 1 END) AS non_uamdm, 
 			COUNT(CASE WHEN mdm_enrolled = 'Yes (User Approved)' AND mdm_enrolled_via_dep <> 'Yes' THEN 1 END) AS uamdm,
 			COUNT(CASE WHEN mdm_enrolled = 'Yes (User Approved)' AND mdm_enrolled_via_dep = 'Yes' THEN 1 END) AS dep_enrolled			
