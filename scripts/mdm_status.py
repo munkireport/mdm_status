@@ -10,6 +10,36 @@ import plistlib
 import sys
 import platform
 
+def get_mdm_server_url():
+    """Uses profiles command to detect the MDM server hostname."""
+    cmd = ['/usr/bin/profiles', '-C', '-o', 'stdout-xml']
+    run = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output, err = run.communicate()
+
+    mdm_server_url = ''
+    try:
+        plist = plistlib.readPlistFromString(output)
+    except: # pylint: disable=bare-except
+        plist = {'_computerlevel': []}
+
+    try:
+        for possible_plist in plist['_computerlevel']:
+            for item_content in possible_plist['ProfileItems']:
+                try:
+                    profile_type = item_content['PayloadType']
+                except KeyError:
+                    profile_type = ''
+                if profile_type == 'com.apple.mdm':
+                    try:
+                        mdm_server_url = item_content['PayloadContent']['ServerURL']
+                    except KeyError:
+                        mdm_server_url = ''
+    except KeyError:
+        mdm_server_url = ''
+
+    result = {'mdm_server_url': mdm_server_url}
+    return result
+
 def get_mdm_status_modern():
     '''Uses profiles command to get MDM status for this machine.
     Requires macOS 10.13.4 due to MDM status output changes.'''
@@ -115,7 +145,9 @@ def main():
             result = get_mdm_status_legacy()
     else:
         result = get_mdm_status_legacy()
-
+    
+    result.update(get_mdm_server_url())
+    
     # Write mdm status results to cache
     output_plist = os.path.join(cachedir, 'mdm_status.plist')
     plistlib.writePlist(result, output_plist)
