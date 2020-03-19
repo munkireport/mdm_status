@@ -13,6 +13,7 @@
     "mdm_not_enrolled_via_dep": "Not Assigned in ABM/ASM",
     "mdm_enrollment": "MDM Enrollment",
  	"mdm_user_approved": "Installed MDM Status",
+ 	"mdm_server_url": "MDM Server URL",
  	"no": "No",
     "mdm_report": "MDM Report",
     "uamdm": "UAMDM",

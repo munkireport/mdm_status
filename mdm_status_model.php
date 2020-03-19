@@ -11,11 +11,13 @@ class Mdm_status_model extends \Model
         $this->rs['serial_number'] = $serial; //$this->rt['serial_number'] = 'VARCHAR(255) UNIQUE';
         $this->rs['mdm_enrolled_via_dep'] = '';
         $this->rs['mdm_enrolled'] = '';
+        $this->rs['mdm_server_url'] = '';
         
         // Add indexes
         $this->idx[] = array('serial_number');
         $this->idx[] = array('mdm_enrolled_via_dep');
         $this->idx[] = array('mdm_enrolled');
+        $this->idx[] = array('mdm_server_url');
 
         // Schema version, increment when creating a db migration
         $this->schema_version = 1;
@@ -46,7 +48,7 @@ class Mdm_status_model extends \Model
 
         $plist = $parser->toArray();
 
-        foreach (array('mdm_enrolled_via_dep', 'mdm_enrolled') as $item) {
+        foreach (array('mdm_enrolled_via_dep', 'mdm_enrolled', 'mdm_server_url') as $item) {
             if (isset($plist[$item])) {
                 $this->$item = $plist[$item];
             } else {
