@@ -9,6 +9,7 @@ import os
 import plistlib
 import sys
 import platform
+import re
 
 def get_mdm_server_url():
     """Uses profiles command to detect the MDM server hostname."""
@@ -31,7 +32,8 @@ def get_mdm_server_url():
                     profile_type = ''
                 if profile_type == 'com.apple.mdm':
                     try:
-                        mdm_server_url = item_content['PayloadContent']['ServerURL']
+                        mdm_full_server_url = item_content['PayloadContent']['ServerURL']
+                        mdm_server_url = re.match('http.?:\/\/[\S]+(?=\/)', mdm_full_server_url).group()
                     except KeyError:
                         mdm_server_url = ''
     except KeyError:
