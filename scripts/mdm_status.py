@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/munkireport/munkireport-python2
 
 """
 MDM status reporting tool. Requires macOS 10.13.4+ for command output compatibility.
