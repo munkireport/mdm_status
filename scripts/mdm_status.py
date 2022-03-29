@@ -1,7 +1,7 @@
-#!/usr/local/munkireport/munkireport-python2
+#!/usr/local/munkireport/munkireport-python3
 
 """
-MDM status reporting tool. Requires macOS 10.13.4+ for command output compatibility.
+MDM status reporting tool. Requires macOS 10.13.4+ (Darwin 17.5.0) for command output compatibility.
 """
 
 import subprocess
@@ -19,7 +19,10 @@ def get_mdm_server_url():
 
     mdm_server_url = ''
     try:
-        plist = plistlib.readPlistFromString(output)
+        try:
+            plist = plistlib.readPlistFromString(output)
+        except AttributeError as e:
+            plist = plistlib.loads(output)
     except: # pylint: disable=bare-except
         plist = {'_computerlevel': []}
 
@@ -53,7 +56,7 @@ def get_mdm_status_modern():
 
     enrolled_via_dep = ''
     mdm_enrollment = ''
-    values = output.split('\n')
+    values = output.decode().split('\n')
     for value in values:
         if "Enrolled via DEP:" in value:
             enrolled_via_dep = value.split(':')[1].lstrip()
@@ -86,7 +89,10 @@ def get_mdm_status_legacy():
     mdm_enrolled_via_dep = ''
     mdm_enrollment = ''
     try:
-        plist = plistlib.readPlistFromString(output)
+        try:
+            plist = plistlib.readPlistFromString(output)
+        except AttributeError as e:
+            plist = plistlib.loads(output)
     except: # pylint: disable=bare-except
         plist = {'_computerlevel': []}
 
@@ -104,7 +110,7 @@ def get_mdm_status_legacy():
         mdm_enrolled_via_dep = "No"
 
     try:
-        if "ConfigurationURL" in dep_output:
+        if "ConfigurationURL" in dep_output.decode():
             mdm_enrolled_via_dep = "Yes"
         else: 
             mdm_enrolled_via_dep = "Yes"
@@ -116,43 +122,31 @@ def get_mdm_status_legacy():
     result.update({'mdm_enrolled_via_dep': mdm_enrolled_via_dep})
     return result
 
-
-def get_minor_os_version():
-    """Returns the minor OS version."""
-    os_version_tuple = platform.mac_ver()[0].split('.')
-    return int(os_version_tuple[1])
-
-def get_patch_os_version():
-    """Returns the minor OS version."""
-    os_version_tuple = platform.mac_ver()[0].split('.')
-    return int(os_version_tuple[2])
+def getFullDarwinVersion():
+    """Returns the Darwin version."""
+    # Catalina -> 10.15.7 -> 19.6.0 -> 1960
+    darwin_version_tuple = platform.release().replace(".","")
+    return int(darwin_version_tuple) 
 
 def main():
     """Main"""
-    # Create cache dir if it does not exist
-    cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
-    if not os.path.exists(cachedir):
-        os.makedirs(cachedir)
 
-    # Skip manual check
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'manualcheck':
-            print 'Manual check: skipping'
-            exit(0)
-    result = dict()
-    if get_minor_os_version() >= 13:
-        if get_patch_os_version >= 4:
-            result = get_mdm_status_modern()
-        else:
-            result = get_mdm_status_legacy()
+    # Check if macOS 10.13.4 (Darwin 17.5.0) or higher
+    if getFullDarwinVersion() >= 1750:
+        result = get_mdm_status_modern()
     else:
         result = get_mdm_status_legacy()
     
     result.update(get_mdm_server_url())
     
     # Write mdm status results to cache
+    cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
     output_plist = os.path.join(cachedir, 'mdm_status.plist')
-    plistlib.writePlist(result, output_plist)
+    try:
+        plistlib.writePlist(result, output_plist)
+    except:
+        with open(output_plist, 'wb') as fp:
+            plistlib.dump(result, fp, fmt=plistlib.FMT_XML)
 
 if __name__ == "__main__":
     main()
