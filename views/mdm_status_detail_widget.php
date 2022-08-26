@@ -9,21 +9,22 @@ $(document).on('appReady', function(){
 	$.getJSON( appUrl + '/module/mdm_status/get_data/' + serialNumber, function( data ) {
 		$.each(data, function(index, item){
             $('#mdm_status-data')
-                .append($('<tr>')
-                    .append($('<th>')
-                        .text(i18n.t('mdm_status.enrolled_in_mdm')))
-                    .append($('<td>')
-                        .text(item.mdm_enrolled)))
-                .append($('<tr>')
-                    .append($('<th>')
-                        .text(i18n.t('mdm_status.mdm_enrolled_via_dep')))
-                    .append($('<td>')
-                        .text(item.mdm_enrolled_via_dep)))
-                .append($('<tr>')
-                    .append($('<th>')
-                        .text(i18n.t('mdm_status.mdm_server_url')))
-                    .append($('<td>')
-                        .text(item.mdm_server_url)));
+                .append($('<tbody>')
+                    .append($('<tr>')
+                        .append($('<th>')
+                            .text(i18n.t('mdm_status.enrolled_in_mdm')))
+                        .append($('<td>')
+                            .text(item.mdm_enrolled)))
+                    .append($('<tr>')
+                        .append($('<th>')
+                            .text(i18n.t('mdm_status.mdm_enrolled_via_dep')))
+                        .append($('<td>')
+                            .text(item.mdm_enrolled_via_dep)))
+                    .append($('<tr>')
+                        .append($('<th>')
+                            .text(i18n.t('mdm_status.mdm_server_url')))
+                        .append($('<td>')
+                            .text(item.mdm_server_url))));
 		});
     });
 });

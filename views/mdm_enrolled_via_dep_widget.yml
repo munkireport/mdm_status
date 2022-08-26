@@ -1,0 +1,15 @@
+type: button
+widget_id: mdm-mdm_enrolled_via_dep_widget
+api_url: /module/mdm_status/get_mdm_enrolled_via_dep_stats
+i18n_title: mdm_status.mdm_enrolled_via_dep_status
+icon: fa-cogs
+listing_link: /show/listing/mdm_status/mdm_status
+buttons:
+  - label: not_dep_enrolled
+    i18n_label: mdm_status.dep_not_assigned
+    class: btn-danger 
+    search_component: No
+  - label: dep_enrolled
+    i18n_label: mdm_status.assigned
+    class: btn-success
+    search_component: Yes

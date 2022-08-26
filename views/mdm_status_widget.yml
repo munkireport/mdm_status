@@ -1,0 +1,23 @@
+type: button
+widget_id: mdm-status-widget
+api_url: /module/mdm_status/get_mdm_stats
+i18n_title: mdm_status.mdm_enrollment
+icon: fa-cogs
+listing_link: /show/listing/mdm_status/mdm_status
+buttons:
+  - label: mdm_no
+    i18n_label: mdm_status.not_enrolled
+    class: btn-danger 
+    search_component: No
+  - label: non_uamdm
+    i18n_label: mdm_status.non_uamdm
+    class: btn-warning
+    search_component: Yes
+  - label: uamdm
+    i18n_label: mdm_status.uamdm
+    class: btn-success
+    search_component: Approved
+  - label: dep_enrolled
+    i18n_label: mdm_status.dep_enrolled
+    class: btn-success
+    search_component: Approved

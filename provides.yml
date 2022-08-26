@@ -1,0 +1,20 @@
+detail_widgets:
+    mdm_status_detail:
+        view: mdm_status_detail_widget
+listings:
+    mdm_status:
+        view: mdm_status_listing
+        i18n: mdm_status.title
+reports:
+    mdm_status:
+        view: mdm_status_report
+        i18n: mdm_status.mdm_report
+widgets:
+    mdm_status:
+        view: mdm_status_widget
+    mdm_enrolled_via_dep:
+        view: mdm_enrolled_via_dep_widget
+    user_approved_status:
+        view: user_approved_status_widget
+    mdm_status_server_url:
+        view: mdm_status_server_url_widget

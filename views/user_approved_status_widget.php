@@ -13,7 +13,7 @@
 <script>
 $(document).on('appUpdate', function(e, lang) {
 
-    $.getJSON( appUrl + '/module/mdm_status/get_mdm_stats', function( data ) {
+    $.getJSON( appUrl + '/module/mdm_status/get_mdm_legacy_stats', function( data ) {
         
     	if(data.error){
     		//alert(data.error);
