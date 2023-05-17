@@ -1,15 +1,14 @@
 <div class="col-md-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-cutlery"></i>
-                <span data-i18n="mdm_status.mdm_server_url"></span>
-                <list-link data-url="/show/listing/mdm_status/mdm_status"></list-link>
-            </h3>
+    <div class="card">
+        <div class="card-heading">
+            <i class="fa fa-cutlery"></i>
+            <span data-i18n="mdm_status.mdm_server_url"></span>
+            <a href="/show/listing/mdm_status/mdm_status" class="pull-right"><i class="fa fa-list"></i></a>
         </div>
-        <div id="ip-panel" class="panel-body text-center">
+        <div id="ip-card" class="card-body text-center">
             <svg id="mdm_status-mdm-server-url" style="width:100%; height: 300px"></svg>
         </div>
-    </div><!-- /panel -->
+    </div><!-- /card -->
 </div><!-- /col -->
 
 <script>
