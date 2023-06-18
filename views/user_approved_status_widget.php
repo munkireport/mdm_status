@@ -1,12 +1,12 @@
 <div class="col-lg-4 col-md-6">
     <div class="card" id="user-approved-status-widget">
-        <div class="card-heading" data-container="body" title="">
+        <div class="card-header" data-container="body" title="">
             <i class="fa fa-cogs"></i>
             <span data-i18n="mdm_status.mdm_user_approved"></span>
-            <a href="/show/listing/mdm_status/mdm_status" class="pull-right"><i class="fa fa-list"></i></a>
+            <a href="/show/listing/mdm_status/mdm_status" class="pull-right text-reset"><i class="fa fa-list"></i></a>
         </div>
 		<div class="card-body text-center"></div>
-    </div><!-- /card -->
+    </div><!-- /panel -->
 </div><!-- /col -->
 
 <script>
@@ -18,7 +18,7 @@ $(document).on('appUpdate', function(e, lang) {
     		//alert(data.error);
     		return;
     	}
-		
+
 		var card = $('#user-approved-status-widget div.card-body'),
 			baseUrl = appUrl + '/show/listing/mdm_status/mdm_status#';
 		card.empty();
