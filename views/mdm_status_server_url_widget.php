@@ -3,7 +3,7 @@
         <div class="card-header" data-container="body">
             <i class="fa fa-cutlery"></i>
             <span data-i18n="mdm_status.mdm_server_url"></span>
-            <a href="/show/listing/mdm_status/mdm_status" class="pull-right text-reset"><i class="fa fa-list"></i></a>
+            <a href="/show/listing/mdm_status/mdm_status" class="pull-right"><i class="fa fa-list"></i></a>
         </div>
         <div id="ip-card" class="card-body text-center">
             <svg id="mdm_status-mdm-server-url" style="width:100%; height: 300px"></svg>
