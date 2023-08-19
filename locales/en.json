@@ -5,6 +5,8 @@
 	"dep_not_assigned": "Not Assigned",
 	"enrolled": "Enrolled",
 	"enrolled_in_mdm": "Enrolled in MDM",
+    "last_mdm_kickstart": "Latest mdmclient Kickstart",
+    "last_software_update_kickstart": "Latest softwareupdated Kickstart",
 	"not_enrolled": "Not Enrolled",
 	"not_uamdm": "Not User Approved",
 	"non_uamdm": "Non-UAMDM",

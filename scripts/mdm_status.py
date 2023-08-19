@@ -10,6 +10,9 @@ import plistlib
 import sys
 import platform
 import re
+import json
+import time
+from datetime import datetime, timedelta, tzinfo
 
 def get_mdm_server_url():
     """Uses profiles command to detect the MDM server hostname."""
@@ -116,7 +119,7 @@ def get_mdm_status_legacy():
             mdm_enrolled_via_dep = "Yes"
     except:
             mdm_enrolled_via_dep = "No"
-            
+
     result = {}
     result.update({'mdm_enrolled': mdm_enrolled})
     result.update({'mdm_enrolled_via_dep': mdm_enrolled_via_dep})
@@ -128,6 +131,33 @@ def getFullDarwinVersion():
     darwin_version_tuple = platform.release().replace(".","")
     return int(darwin_version_tuple) 
 
+def string_to_timestamp(time_string):
+    time_string = time_string.strip()
+    date_str, tz = time_string[:-6], time_string[-6:]
+    dt_utc = datetime.strptime(date_str.strip(), "%Y-%m-%dT%H:%M:%S.%f") # 2023-08-17T01:21:54.555443-04:00
+    dt = dt_utc.replace(tzinfo=FixedOffset(tz))
+    utc_naive = dt.replace(tzinfo=None) - dt.utcoffset()
+    return int((utc_naive - datetime(1970, 1, 1)).total_seconds())
+
+class FixedOffset(tzinfo):
+    """offset_str: Fixed offset in str: e.g. '-0400'"""
+    def __init__(self, offset_str):
+        sign, hours, minutes = offset_str[0], offset_str[1:3], offset_str[3:].replace(":","")
+        offset = (int(hours) * 60 + int(minutes.replace(":",""))) * (-1 if sign == "-" else 1)
+        self.__offset = timedelta(minutes=offset)
+        # NOTE: the last part is to remind about deprecated POSIX GMT+h timezones
+        # that have the opposite sign in the name;
+        # the corresponding numeric value is not used e.g., no minutes
+        '<%+03d%02d>%+d' % (int(hours), int(minutes), int(hours)*-1)
+    def utcoffset(self, dt=None):
+        return self.__offset
+    def tzname(self, dt=None):
+        return self.__name
+    def dst(self, dt=None):
+        return timedelta(0)
+    def __repr__(self):
+        return 'FixedOffset(%d)' % (self.utcoffset().total_seconds() / 60)
+
 def main():
     """Main"""
 
@@ -136,9 +166,18 @@ def main():
         result = get_mdm_status_modern()
     else:
         result = get_mdm_status_legacy()
-    
+
     result.update(get_mdm_server_url())
-    
+
+    # Check if we have mdm-watchdog's state.json
+    if os.path.isfile('/Library/Application Support/mdm-watchdog/state.json'):
+        watchdog_state = json.loads(open('/Library/Application Support/mdm-watchdog/state.json', 'r').read())
+        for item in watchdog_state:
+            if item == "last_mdm_kickstart" and "0001-01-01" not in watchdog_state[item]:
+                result['last_mdm_kickstart'] = string_to_timestamp(watchdog_state[item])
+            elif item == "last_software_update_kickstart" and "0001-01-01" not in watchdog_state[item]:
+                result['last_software_update_kickstart'] = string_to_timestamp(watchdog_state[item])
+
     # Write mdm status results to cache
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
     output_plist = os.path.join(cachedir, 'mdm_status.plist')
