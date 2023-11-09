@@ -1,3 +1,7 @@
+client_tabs:
+    mdm_status-tab:
+        view: mdm_status_tab
+        i18n: mdm_status.title
 detail_widgets:
     mdm_status_detail:
         view: mdm_status_detail_widget
@@ -18,3 +22,11 @@ widgets:
         view: user_approved_status_widget
     mdm_status_server_url:
         view: mdm_status_server_url_widget
+    mdm_status_org_name:
+        view: mdm_status_org_name_widget
+    mdm_status_supervised:
+        view: mdm_status_supervised_widget
+    mdm_status_user_enrollment:
+        view: mdm_status_user_enrollment_widget
+    mdm_status_disallow_activation_lock:
+        view: mdm_status_disallow_activation_lock_widget

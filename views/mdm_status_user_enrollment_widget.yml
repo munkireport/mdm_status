@@ -1,0 +1,13 @@
+type: button
+widget_id: mdm-status-user-enrollment-widget
+api_url: /module/mdm_status/get_button_widget/is_user_enrollment
+i18n_title: mdm_status.is_user_enrollment
+icon: fa-user-circle-o
+listing_link: /show/listing/mdm_status/mdm_status
+buttons:
+  - label: Yes
+    i18n_label: yes
+    class: btn-warning
+  - label: No
+    i18n_label: no
+    class: btn-success

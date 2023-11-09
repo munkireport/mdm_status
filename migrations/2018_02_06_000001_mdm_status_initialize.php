@@ -5,8 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class MDMStatusInitialize extends Migration
-{    
-
+{
     public function up()
     {
     
@@ -28,6 +27,4 @@ class MDMStatusInitialize extends Migration
         $capsule = new Capsule();
         $capsule::schema()->dropIfExists('mdm_status');
     }
-
-
 }

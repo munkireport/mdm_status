@@ -12,14 +12,19 @@
                 <th data-i18n="username" data-colname='reportdata.long_username'></th>
                 <th data-i18n="mdm_status.mdm_enrollment" data-colname='mdm_status.mdm_enrolled'></th>
                 <th data-i18n="mdm_status.mdm_enrolled_via_dep_status" data-colname='mdm_status.mdm_enrolled_via_dep'></th>
+                <th data-i18n="mdm_status.is_user_enrollment" data-colname='mdm_status.is_user_enrollment'></th>
+                <th data-i18n="mdm_status.denies_activation_lock" data-colname='mdm_status.denies_activation_lock'></th>
+                <th data-i18n="mdm_status.is_supervised" data-colname='mdm_status.is_supervised'></th>
+                <th data-i18n="mdm_status.org_name" data-colname='mdm_status.org_name'></th>
                 <th data-i18n="mdm_status.mdm_server_url" data-colname='mdm_status.mdm_server_url'></th>
                 <th data-i18n="mdm_status.last_mdm_kickstart" data-colname='mdm_status.last_mdm_kickstart'></th>
                 <th data-i18n="mdm_status.last_software_update_kickstart" data-colname='mdm_status.last_software_update_kickstart'></th>
+                <th data-i18n="mdm_status.original_os_version" data-colname='mdm_status.original_os_version'></th>
               </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td data-i18n="listing.loading" colspan="8" class="dataTables_empty"></td>
+                    <td data-i18n="listing.loading" colspan="13" class="dataTables_empty"></td>
                 </tr>
             </tbody>
           </table>
@@ -78,8 +83,18 @@
                 var name=$('td:eq(0)', nRow).html();
                 if(name == ''){name = "No Name"};
                 var sn=$('td:eq(1)', nRow).html();
-                var link = mr.getClientDetailLink(name, sn);
+                var link = mr.getClientDetailLink(name, sn, '#tab_mdm_status-tab');
                 $('td:eq(0)', nRow).html(link);
+
+                var mdm_enrolled = $('td:eq(3)', nRow).html();
+                $('td:eq(3)', nRow).html(function(){
+                    if( mdm_enrolled == 'Yes'){
+                        return '<span class="label label-warning">'+i18n.t('mdm_status.not_uamdm')+'</span>';
+                    } else if( mdm_enrolled == 'Yes (User Approved)'){
+                        return '<span class="label label-success">'+i18n.t('mdm_status.user_approved')+'</span>';
+                    }
+                    return '<span class="label label-danger">'+i18n.t('mdm_status.not_enrolled')+'</span>';
+                });
 
                 var dep_enrolled = $('td:eq(4)', nRow).html();
                 $('td:eq(4)', nRow).html(function(){
@@ -89,28 +104,45 @@
                     return '<span class="label label-danger">'+i18n.t('mdm_status.mdm_not_enrolled_via_dep')+'</span>';
                 });
 
-                var mdm_enrolled = $('td:eq(3)', nRow).html();
-                $('td:eq(3)', nRow).html(function(){
-                    if( mdm_enrolled == 'Yes'){
-                        return '<span class="label label-warning">'+i18n.t('mdm_status.not_uamdm')+'</span>';
-                                    } else if( mdm_enrolled == 'Yes (User Approved)'){
-                                            return '<span class="label label-success">'+i18n.t('mdm_status.user_approved')+'</span>';
-                                    }
-                    return '<span class="label label-danger">'+i18n.t('mdm_status.not_enrolled')+'</span>';
+                var colvar = $('td:eq(5)', nRow).html();
+                $('td:eq(5)', nRow).html(function(){
+                    if(colvar == '1'){
+                        return '<span class="label label-warning">'+i18n.t('yes')+'</span>';
+                    } else if (colvar == '0'){
+                        return '<span class="label label-success">'+i18n.t('no')+'</span>';
+                    }
+                });
+
+                var colvar = $('td:eq(6)', nRow).html();
+                $('td:eq(6)', nRow).html(function(){
+                    if(colvar == '1'){
+                        return '<span class="label label-success">'+i18n.t('yes')+'</span>';
+                    } else if (colvar == '0'){
+                        return '<span class="label label-danger">'+i18n.t('no')+'</span>';
+                    }
+                });
+
+                var colvar = $('td:eq(7)', nRow).html();
+                $('td:eq(7)', nRow).html(function(){
+                    if(colvar == '1'){
+                        return '<span class="label label-success">'+i18n.t('yes')+'</span>';
+                    } else if (colvar == '0'){
+                        return '<span class="label label-danger">'+i18n.t('no')+'</span>';
+                    }
                 });
 
                 // Format last_mdm_kickstart timestamp
-                var checkin = parseInt($('td:eq(6)', nRow).html());
+                var checkin = parseInt($('td:eq(10)', nRow).html());
                 if (checkin > 0){
                     var date = new Date(checkin * 1000);
-                    $('td:eq(6)', nRow).html('<span title="'+moment(date).fromNow()+'">'+moment(date).format('llll')+'</span>');
+                    $('td:eq(10)', nRow).html('<span title="'+moment(date).fromNow()+'">'+moment(date).format('llll')+'</span>');
                 }
 
                 // Format last_software_update_kickstart timestamp
-                var checkin = parseInt($('td:eq(7)', nRow).html());
+                var checkin = parseInt($('td:eq(11)', nRow).html());
                 if (checkin > 0){
                     var date = new Date(checkin * 1000);
-                    $('td:eq(7)', nRow).html('<span title="'+moment(date).fromNow()+'">'+moment(date).format('llll')+'</span>');
+                    $('td:eq(11)', nRow).html('<span title="'+moment(date).fromNow()+'">'+moment(date).format('llll')+'</span>');
                 }
             }
         });

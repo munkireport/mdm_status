@@ -1,0 +1,13 @@
+type: button
+widget_id: mdm-status-disallow-activation-lock-widget
+api_url: /module/mdm_status/get_button_widget/denies_activation_lock
+i18n_title: mdm_status.denies_activation_lock
+icon: fa-lock
+listing_link: /show/listing/mdm_status/mdm_status
+buttons:
+  - label: No
+    i18n_label: no
+    class: btn-danger
+  - label: Yes
+    i18n_label: yes
+    class: btn-success

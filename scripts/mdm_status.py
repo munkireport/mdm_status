@@ -125,6 +125,65 @@ def get_mdm_status_legacy():
     result.update({'mdm_enrolled_via_dep': mdm_enrolled_via_dep})
     return result
 
+def get_mdm_info():
+    # Get additional information about the MDM and ABM/ASM org
+    cmd = ['/usr/libexec/mdmclient', 'dumpManagementStatus']
+    proc = subprocess.Popen(cmd, shell=False, bufsize=-1, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    (output, unused_error) = proc.communicate()
+
+    mdm_info = output.decode("utf-8", errors="ignore")
+    result = {}
+
+    for item in mdm_info.split('\n'):
+        if "DeviceIsSupervised = " in item:
+            result['is_supervised'] = to_bool(item.replace("DeviceIsSupervised = ", "").replace(";", "").replace('"', "").strip())
+        elif "EnrolledInDEP = " in item:
+            result['enrolled_in_dep'] = to_bool(item.replace("EnrolledInDEP = ", "").replace(";", "").replace('"', "").strip())
+        elif "            DeniesActivationLock = " in item: # We need the extra spaces in here
+            result['denies_activation_lock'] = to_bool(item.replace("DeniesActivationLock = ", "").replace(";", "").replace('"', "").strip())
+        elif "IsActivationLockManageable = " in item:
+            result['activation_lock_manageable'] = to_bool(item.replace("IsActivationLockManageable = ", "").replace(";", "").replace('"', "").strip())
+        elif "IsUserApproved = " in item:
+            result['is_user_approved'] = to_bool(item.replace("IsUserApproved = ", "").replace(";", "").replace('"', "").strip())
+        elif "IsUserEnrollment = " in item:
+            result['is_user_enrollment'] = to_bool(item.replace("IsUserEnrollment = ", "").replace(";", "").replace('"', "").strip())
+        elif "ManagedViaMDM = " in item:
+            result['managed_via_mdm'] = to_bool(item.replace("ManagedViaMDM = ", "").replace(";", "").replace('"', "").strip())
+        elif "OrganizationAddress = " in item:
+            result['org_address_full'] = item.replace("OrganizationAddress = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrganizationAddressLine1 = " in item:
+            result['org_address'] = item.replace("OrganizationAddressLine1 = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrganizationCity = " in item:
+            result['org_city'] = item.replace("OrganizationCity = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrganizationCountry = " in item:
+            result['org_country'] = item.replace("OrganizationCountry = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrganizationEmail = " in item:
+            result['org_email'] = item.replace("OrganizationEmail = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrganizationMagic = " in item:
+            result['org_magic'] = item.replace("OrganizationMagic = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrganizationName = " in item:
+            result['org_name'] = item.replace("OrganizationName = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrganizationPhone = " in item:
+            result['org_phone'] = item.replace("OrganizationPhone = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrganizationSupportEmail = " in item:
+            result['org_support_email'] = item.replace("OrganizationSupportEmail = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrganizationZipCode = " in item:
+            result['org_zip_code'] = item.replace("OrganizationZipCode = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrigInstallOSVersion = " in item:
+            result['original_os_version'] = item.replace("OrigInstallOSVersion = ", "").replace(";", "").replace('"', "").strip()
+        elif "ServerURL = " in item:
+            result['mdm_server_url_full'] = item.replace("ServerURL = ", "").replace(";", "").replace('"', "").strip()
+
+    return result
+
+def to_bool(s):
+    if s == "":
+        return ""
+    elif s == True or s == "YES" or s == "Yes" or s == "yes" or s == "1":
+        return 1
+    else:
+        return 0
+
 def getFullDarwinVersion():
     """Returns the Darwin version."""
     # Catalina -> 10.15.7 -> 19.6.0 -> 1960
@@ -168,6 +227,11 @@ def main():
         result = get_mdm_status_legacy()
 
     result.update(get_mdm_server_url())
+
+    try:
+        result.update(get_mdm_info())
+    except:
+        pass
 
     # Check if we have mdm-watchdog's state.json
     if os.path.isfile('/Library/Application Support/mdm-watchdog/state.json'):

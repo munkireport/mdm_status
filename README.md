@@ -29,3 +29,22 @@ The table contains the following information:
 * mdm_server_url - string - URL of enrolled MDM server
 * last_mdm_kickstart - big int - Timestamp of when mdm-watchdog last kickstarted the `mdmclient`
 * last_software_update_kickstart - big int - Timestamp of when mdm-watchdog last kickstarted `softwareupdated`
+* is_supervised - int - Is the Mac supervised
+* enrolled_in_dep - int - Is the Mac in ABM/ASM
+* denies_activation_lock - int - Does the MDM disallow activation lock
+* activation_lock_manageable - int - Can the MDM manage activation lock
+* is_user_approved - int - Is the MDM user approved
+* is_user_enrollment - int - Was the Mac enrolled in the MDM via user enrollment
+* managed_via_mdm - int - Is the Mac managed by MDM
+* org_address_full - text - One line address of organization
+* org_address - string - Organization's address
+* org_city - string - Organization's city
+* org_country - string - Organization's country
+* org_email - string - Organization's email address
+* org_magic - string - Organization's magic (short name)
+* org_name - string - Organization's name
+* org_phone - string - Organization's phone number
+* org_support_email - string - Organization's support email address
+* org_zip_code - string - Organization's ZIP code
+* original_os_version - string - Version of macOS the Mac originally enrolled with
+* mdm_server_url_full - string - Full URL of MDM server

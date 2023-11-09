@@ -3,4 +3,9 @@ row1:
   mdm_enrolled_via_dep:
   user_approved_status:
 row2:
+  mdm_status_supervised:
+  mdm_status_user_enrollment:
+  mdm_status_disallow_activation_lock:
+row3:
   mdm_status_server_url:
+  mdm_status_org_name:
