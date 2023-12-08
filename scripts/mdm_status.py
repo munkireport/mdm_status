@@ -192,7 +192,12 @@ def getFullDarwinVersion():
 
 def string_to_timestamp(time_string):
     time_string = time_string.strip()
-    date_str, tz = time_string[:-6], time_string[-6:]
+    if "Z" in time_string:
+        date_str, tz = time_string[:-6], time_string[-6:]
+    else:
+        date_str= time_string[:-6]
+        tz = "-00:00"
+
     dt_utc = datetime.strptime(date_str.strip(), "%Y-%m-%dT%H:%M:%S.%f") # 2023-08-17T01:21:54.555443-04:00
     dt = dt_utc.replace(tzinfo=FixedOffset(tz))
     utc_naive = dt.replace(tzinfo=None) - dt.utcoffset()
@@ -238,9 +243,15 @@ def main():
         watchdog_state = json.loads(open('/Library/Application Support/mdm-watchdog/state.json', 'r').read())
         for item in watchdog_state:
             if item == "last_mdm_kickstart" and "0001-01-01" not in watchdog_state[item]:
-                result['last_mdm_kickstart'] = string_to_timestamp(watchdog_state[item])
+                try:
+                    result['last_mdm_kickstart'] = string_to_timestamp(watchdog_state[item])
+                except:
+                    pass
             elif item == "last_software_update_kickstart" and "0001-01-01" not in watchdog_state[item]:
-                result['last_software_update_kickstart'] = string_to_timestamp(watchdog_state[item])
+                try:
+                    result['last_software_update_kickstart'] = string_to_timestamp(watchdog_state[item])
+                except:
+                    pass
 
     # Write mdm status results to cache
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
