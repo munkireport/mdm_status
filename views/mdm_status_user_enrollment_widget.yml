@@ -8,6 +8,8 @@ buttons:
   - label: Yes
     i18n_label: yes
     class: btn-warning
+    search_component: userenrolled
   - label: No
     i18n_label: no
     class: btn-success
+    search_component: notuserenrolled

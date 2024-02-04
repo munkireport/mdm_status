@@ -8,7 +8,7 @@ buttons:
   - label: mdm_no
     i18n_label: mdm_status.not_enrolled
     class: btn-danger 
-    search_component: No
+    search_component: mdmnotenrolled
   - label: non_uamdm
     i18n_label: mdm_status.non_uamdm
     class: btn-warning
@@ -20,4 +20,4 @@ buttons:
   - label: dep_enrolled
     i18n_label: mdm_status.dep_enrolled
     class: btn-success
-    search_component: Approved
+    search_component: depenrolled

@@ -72,6 +72,106 @@
                 type: "POST",
                 data: function( d ){
                   d.mrColNotEmpty = "mdm_status.id"
+                
+                // Look for 'mdmnotenrolled' keyword
+                if(d.search.value.match(/^mdmnotenrolled$/))
+                {
+                    // Add column specific search
+                    d.columns[3].search.value = 'No';
+                    // Clear global search
+                    d.search.value = '';
+                }
+
+                // Look for 'mdmenrolled' keyword
+                if(d.search.value.match(/^mdmenrolled$/))
+                {
+                    // Add column specific search
+                    d.columns[3].search.value = 'Yes (User Approved)';
+                    // Clear global search
+                    d.search.value = '';
+                }
+
+                // Look for 'depassigned' keyword
+                if(d.search.value.match(/^depassigned$/))
+                {
+                    // Add column specific search
+                    d.columns[4].search.value = 'Yes';
+                    // Clear global search
+                    d.search.value = '';
+                }
+
+                // Look for 'notdepassigned' keyword
+                if(d.search.value.match(/^notdepassigned$/))
+                {
+                    // Add column specific search
+                    d.columns[4].search.value = 'No';
+                    // Clear global search
+                    d.search.value = '';
+                }
+
+                // Look for 'supervised' keyword
+                if(d.search.value.match(/^supervised$/))
+                {
+                    // Add column specific search
+                    d.columns[7].search.value = '= 1';
+                    // Clear global search
+                    d.search.value = '';
+                }
+
+                // Look for 'notsupervised' keyword
+                if(d.search.value.match(/^notsupervised$/))
+                {
+                    // Add column specific search
+                    d.columns[7].search.value = '!= 1';
+                    // Clear global search
+                    d.search.value = '';
+                }
+
+                // Look for 'disallowlock' keyword
+                if(d.search.value.match(/^disallowlock$/))
+                {
+                    // Add column specific search
+                    d.columns[6].search.value = '= 1';
+                    // Clear global search
+                    d.search.value = '';
+                }
+
+                // Look for 'allowlock' keyword
+                if(d.search.value.match(/^allowlock$/))
+                {
+                    // Add column specific search
+                    d.columns[6].search.value = '!= 1';
+                    // Clear global search
+                    d.search.value = '';
+                }
+
+                // Look for 'userenrolled' keyword
+                if(d.search.value.match(/^userenrolled$/))
+                {
+                    // Add column specific search
+                    d.columns[5].search.value = '= 1';
+                    // Clear global search
+                    d.search.value = '';
+                }
+
+                // Look for 'notuserenrolled' keyword
+                if(d.search.value.match(/^notuserenrolled$/))
+                {
+                    // Add column specific search
+                    d.columns[5].search.value = '!= 1';
+                    // Clear global search
+                    d.search.value = '';
+                }
+
+                // Look for 'depenrolled' keyword
+                if(d.search.value.match(/^depenrolled$/))
+                {
+                    // Add column specific search
+                    // d.columns[3].search.value = 'Yes (User Approved)';
+                    d.columns[4].search.value = 'Yes';
+                    // Clear global search
+                    d.search.value = '';
+                }
                 }
             },
             dom: mr.dt.buttonDom,

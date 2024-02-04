@@ -8,8 +8,8 @@ buttons:
   - label: not_dep_enrolled
     i18n_label: mdm_status.dep_not_assigned
     class: btn-danger 
-    search_component: No
+    search_component: notdepassigned
   - label: dep_enrolled
     i18n_label: mdm_status.assigned
     class: btn-success
-    search_component: Yes
+    search_component: depassigned
