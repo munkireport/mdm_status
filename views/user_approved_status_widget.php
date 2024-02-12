@@ -27,7 +27,7 @@ $(document).on('appUpdate', function(e, lang) {
         // Set statuses
         if(data.mdm_no || data.non_uamdm){
             var mdm_no_ints = parseInt(data.mdm_no) + parseInt(data.non_uamdm);
-            panel.append(' <a href="'+baseUrl+'" class="btn btn-danger"><span class="bigger-150">'+mdm_no_ints+'</span><br>'+i18n.t('mdm_status.not_uamdm')+'</a>');
+            panel.append(' <a href="'+baseUrl+'mdmnotenrolled" class="btn btn-danger"><span class="bigger-150">'+mdm_no_ints+'</span><br>'+i18n.t('mdm_status.not_uamdm')+'</a>');
         }
         if(data.dep_enrolled || data.uamdm){
             var mdm_ints = parseInt(data.dep_enrolled) + parseInt(data.uamdm);

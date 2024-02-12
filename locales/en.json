@@ -1,7 +1,7 @@
 {
     "assigned": "Assigned to MDM",
 	"dep": "ABM/ASM",
-	"dep_enrolled": "ABM/ASM Enrolled",
+	"dep_enrolled": "DEP/ADE",
 	"dep_not_assigned": "Not Assigned",
 	"enrolled": "Enrolled",
 	"enrolled_in_mdm": "Enrolled in MDM",
