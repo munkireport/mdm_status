@@ -178,7 +178,9 @@ class Mdm_status_controller extends Module_controller
         
         $sql = "SELECT  `mdm_enrolled`, `is_user_approved`, `is_supervised`, `mdm_enrolled_via_dep`, `is_user_enrollment`, `denies_activation_lock`, `mdm_server_url`, `last_mdm_kickstart`, `last_software_update_kickstart`, `org_name`, `org_phone`, `org_email`, `org_support_email`, `org_address_full`, `org_country`, `original_os_version`
                     FROM `mdm_status`
-                    WHERE `serial_number` = '$serial_number'";
+                    LEFT JOIN reportdata USING (serial_number)
+                    ".get_machine_group_filter()."
+                    AND `serial_number` = '$serial_number'";
         
         $queryobj = new Mdm_status_model();
         $obj = new View();

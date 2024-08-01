@@ -9,14 +9,17 @@ buttons:
     i18n_label: mdm_status.not_enrolled
     class: btn-danger 
     search_component: mdmnotenrolled
+    hide_when_zero: True
   - label: non_uamdm
     i18n_label: mdm_status.non_uamdm
     class: btn-warning
     search_component: Yes
+    hide_when_zero: True
   - label: uamdm
     i18n_label: mdm_status.uamdm
     class: btn-success
     search_component: Approved
+    hide_when_zero: True
   - label: dep_enrolled
     i18n_label: mdm_status.dep_enrolled
     class: btn-success
