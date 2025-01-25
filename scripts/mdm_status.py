@@ -39,7 +39,7 @@ def get_mdm_server_url():
                 if profile_type == 'com.apple.mdm':
                     try:
                         mdm_full_server_url = item_content['PayloadContent']['ServerURL']
-                        mdm_server_url = re.match('http.?:\/\/[\S]+(?=\/)', mdm_full_server_url).group()
+                        mdm_server_url = re.match(r'http.?:\/\/[\S]+(?=\/)', mdm_full_server_url).group()
                     except KeyError:
                         mdm_server_url = ''
     except KeyError:
