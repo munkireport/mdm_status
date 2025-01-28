@@ -1,0 +1,9 @@
+type: scrollbox
+widget_id: mdm_status-server-url-scroll-widget
+api_url: /module/mdm_status/get_scroll_widget/mdm_server_url
+i18n_title: mdm_status.mdm_server_url
+icon: fa-cutlery
+listing_link: /show/listing/mdm_status/mdm_status
+search_key: mdm_server_url
+i18n_empty_result: no_data
+badge: count

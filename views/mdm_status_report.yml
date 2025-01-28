@@ -7,6 +7,10 @@ row2:
   mdm_status_user_enrollment:
   mdm_status_disallow_activation_lock:
 row3:
+  mdm_status_server_url_scroll:
+  mdm_status_org_name_scroll:
+  mdm_status_org_department_scroll:
+row4:
   mdm_status_server_url:
   mdm_status_org_name:
   mdm_status_org_department:

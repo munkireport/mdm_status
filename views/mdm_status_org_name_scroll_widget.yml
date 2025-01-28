@@ -1,0 +1,9 @@
+type: scrollbox
+widget_id: mdm_status-org-name-scroll-widget
+api_url: /module/mdm_status/get_scroll_widget/org_name
+i18n_title: mdm_status.org_name
+icon: fa-building-o
+listing_link: /show/listing/mdm_status/mdm_status
+search_key: org_name
+i18n_empty_result: no_data
+badge: count

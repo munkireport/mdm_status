@@ -32,3 +32,9 @@ widgets:
         view: mdm_status_disallow_activation_lock_widget
     mdm_status_org_department:
         view: mdm_status_org_department_widget
+    mdm_status_org_department_scroll:
+        view: mdm_status_org_department_scroll_widget
+    mdm_status_server_url_scroll:
+        view: mdm_status_server_url_scroll_widget
+    mdm_status_org_name_scroll:
+        view: mdm_status_org_name_scroll_widget

@@ -166,6 +166,28 @@ class Mdm_status_controller extends Module_controller
 
         jsonView($out);
     }
+    
+    /**
+     * Get data for scroll widget
+     *
+     * @author tuxudo
+     **/
+    public function get_scroll_widget($column)
+    {
+        // Remove non-column name characters
+        $column = preg_replace("/[^A-Za-z0-9_\-]]/", '', $column);
+
+        $sql = "SELECT COUNT(CASE WHEN ".$column." <> '' AND ".$column." IS NOT NULL THEN 1 END) AS count, ".$column." 
+                FROM mdm_status
+                LEFT JOIN reportdata USING (serial_number)
+                ".get_machine_group_filter()."
+                AND ".$column." <> '' AND ".$column." IS NOT NULL 
+                GROUP BY ".$column."
+                ORDER BY count DESC";
+
+        $queryobj = new Mdm_status_model;
+        jsonView($queryobj->query($sql));
+    }
 
     /**
      * Get tab data for serial_number

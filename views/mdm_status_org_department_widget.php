@@ -1,7 +1,7 @@
 <div class="col-md-4">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-building-o"></i>
+            <h3 class="panel-title"><i class="fa fa-object-group"></i>
                 <span data-i18n="mdm_status.org_department"></span>
                 <list-link data-url="/show/listing/mdm_status/mdm_status"></list-link>
             </h3>
