@@ -6,14 +6,14 @@
 <script>
 $(document).on('appReady', function(){
     $.getJSON(appUrl + '/module/mdm_status/get_tab_data/' + serialNumber, function(data){
-        
+
         // Check if we have data
         if( data.length == 0 ){
             $('#mdm_status-msg').text(i18n.t('no_data'));
         } else {
             // Hide loading message
             $('#mdm_status-msg').text('');
-            
+
             // var skipThese = [];
             $.each(data, function(i,d){
 

@@ -119,6 +119,28 @@ class Mdm_status_controller extends Module_controller
         jsonView($out);
     }
 
+    // Get organization department for graph widget
+    public function get_org_department()
+    {
+        $sql = "SELECT COUNT(CASE WHEN org_department <> '' AND org_department IS NOT NULL THEN 1 END) AS count, org_department
+                FROM mdm_status
+                LEFT JOIN reportdata USING (serial_number)
+                ".get_machine_group_filter()."
+                GROUP BY org_department
+                ORDER BY count DESC";
+
+        $out = [];
+        $queryobj = new Mdm_status_model;
+        foreach ($queryobj->query($sql) as $obj) {
+            if ("$obj->count" !== "0") {
+                $obj->key = $obj->org_department ? $obj->org_department : 'Unknown';
+                $out[] = $obj;
+            }
+        }
+
+        jsonView($out);
+    }
+
     /**
      * Get data for button widget
      *
@@ -176,7 +198,7 @@ class Mdm_status_controller extends Module_controller
         // Remove non-serial number characters
         $serial_number = preg_replace("/[^A-Za-z0-9_\-]]/", '', $serial_number);
         
-        $sql = "SELECT  `mdm_enrolled`, `is_user_approved`, `is_supervised`, `mdm_enrolled_via_dep`, `is_user_enrollment`, `denies_activation_lock`, `mdm_server_url`, `last_mdm_kickstart`, `last_software_update_kickstart`, `org_name`, `org_phone`, `org_email`, `org_support_email`, `org_address_full`, `org_country`, `original_os_version`
+        $sql = "SELECT  `mdm_enrolled`, `is_user_approved`, `is_supervised`, `mdm_enrolled_via_dep`, `is_user_enrollment`, `denies_activation_lock`, `mdm_server_url`, `last_mdm_kickstart`, `last_software_update_kickstart`, `org_name`, `org_department`, `org_phone`, `org_email`, `org_support_email`, `org_address_full`, `org_country`, `original_os_version`
                     FROM `mdm_status`
                     LEFT JOIN reportdata USING (serial_number)
                     ".get_machine_group_filter()."

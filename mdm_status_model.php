@@ -33,6 +33,7 @@ class Mdm_status_model extends \Model
         $this->rs['org_zip_code'] = null;
         $this->rs['original_os_version'] = null;
         $this->rs['mdm_server_url_full'] = null;
+        $this->rs['org_department'] = null;
 
         if ($serial) {
             $this->retrieve_record($serial);
@@ -57,7 +58,7 @@ class Mdm_status_model extends \Model
 
         $plist = $parser->toArray();
 
-        foreach (array('mdm_enrolled_via_dep', 'mdm_enrolled', 'mdm_server_url', 'last_mdm_kickstart', 'last_software_update_kickstart', 'is_supervised', 'enrolled_in_dep', 'denies_activation_lock', 'activation_lock_manageable', 'is_user_approved', 'is_user_enrollment', 'managed_via_mdm', 'org_address_full', 'org_address', 'org_city', 'org_country', 'org_email', 'org_magic', 'org_name', 'org_phone', 'org_support_email', 'org_zip_code', 'original_os_version', 'mdm_server_url_full') as $item) {
+        foreach (array('mdm_enrolled_via_dep', 'mdm_enrolled', 'mdm_server_url', 'last_mdm_kickstart', 'last_software_update_kickstart', 'is_supervised', 'enrolled_in_dep', 'denies_activation_lock', 'activation_lock_manageable', 'is_user_approved', 'is_user_enrollment', 'managed_via_mdm', 'org_address_full', 'org_address', 'org_city', 'org_country', 'org_email', 'org_magic', 'org_name', 'org_phone', 'org_support_email', 'org_zip_code', 'original_os_version', 'mdm_server_url_full', 'org_department') as $item) {
             if (isset($plist[$item])) {
                 $this->$item = $plist[$item];
             } else if ($item == 'mdm_enrolled_via_dep' || $item == 'mdm_enrolled' || $item == 'mdm_server_url'){

@@ -20,11 +20,12 @@
                 <th data-i18n="mdm_status.last_mdm_kickstart" data-colname='mdm_status.last_mdm_kickstart'></th>
                 <th data-i18n="mdm_status.last_software_update_kickstart" data-colname='mdm_status.last_software_update_kickstart'></th>
                 <th data-i18n="mdm_status.original_os_version" data-colname='mdm_status.original_os_version'></th>
+                <th data-i18n="mdm_status.org_department" data-colname='mdm_status.org_department'></th>
               </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td data-i18n="listing.loading" colspan="13" class="dataTables_empty"></td>
+                    <td data-i18n="listing.loading" colspan="14" class="dataTables_empty"></td>
                 </tr>
             </tbody>
           </table>

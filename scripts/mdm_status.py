@@ -169,6 +169,8 @@ def get_mdm_info():
             result['org_support_email'] = item.replace("OrganizationSupportEmail = ", "").replace(";", "").replace('"', "").strip()
         elif "OrganizationZipCode = " in item:
             result['org_zip_code'] = item.replace("OrganizationZipCode = ", "").replace(";", "").replace('"', "").strip()
+        elif "OrganizationDepartment = " in item:
+            result['org_department'] = item.replace("OrganizationDepartment = ", "").replace(";", "").replace('"', "").strip()
         elif "OrigInstallOSVersion = " in item:
             result['original_os_version'] = item.replace("OrigInstallOSVersion = ", "").replace(";", "").replace('"', "").strip()
         elif "ServerURL = " in item:

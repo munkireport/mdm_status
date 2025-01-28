@@ -40,6 +40,7 @@
     "org_phone": "Phone",
     "org_support_email": "Support Email",
     "org_zip_code": "ZIP Code",
+    "org_department": "Department",
     "original_os_version": "Original Enrolled OS Version",
     "mdm_server_url_full": "Full MDM Server URL",
     "yes": "Yes"

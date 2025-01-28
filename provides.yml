@@ -30,3 +30,5 @@ widgets:
         view: mdm_status_user_enrollment_widget
     mdm_status_disallow_activation_lock:
         view: mdm_status_disallow_activation_lock_widget
+    mdm_status_org_department:
+        view: mdm_status_org_department_widget
