@@ -108,6 +108,8 @@ def get_mdm_status_legacy():
                     profile_type = ''
                 if profile_type == 'com.apple.mdm':
                     mdm_enrolled = "Yes (User Approved)"
+                else:
+                    mdm_enrolled =  "No"
     except KeyError:
         mdm_enrolled =  "No"
         mdm_enrolled_via_dep = "No"
@@ -116,7 +118,7 @@ def get_mdm_status_legacy():
         if "ConfigurationURL" in dep_output.decode():
             mdm_enrolled_via_dep = "Yes"
         else: 
-            mdm_enrolled_via_dep = "Yes"
+            mdm_enrolled_via_dep = "No"
     except:
             mdm_enrolled_via_dep = "No"
 
