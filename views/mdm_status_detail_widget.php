@@ -1,5 +1,5 @@
 <div class="col-lg-4">
-    <h4><i class="fa fa-gear"></i> <span data-i18n="mdm_status.title"></span><a data-toggle="tab" title="MDM Status" class="btn btn-xs pull-right" href="#mdm_status-tab" aria-expanded="false"><i class="fa fa-arrow-right"></i></a></h4>
+    <h4><i class="fa fa-gear"></i> <span data-i18n="mdm_status.title"></span></h4>
     <table id="mdm_status-data" class="table"></table>
 </div>
 
